@@ -1,8 +1,8 @@
 MRuby::Gem::Specification.new('mruby-rust') do |spec|
-	spec.license = 'MIT'
-	spec.authors = 'Terence Lee'
-	spec.version = '0.0.1'
-	spec.description = 'Rust from Mruby'
+  spec.license = 'MIT'
+  spec.authors = 'Terence Lee'
+  spec.version = '0.0.1'
+  spec.description = 'Rust from Mruby'
   spec.bins = ["mruby-rust"]
 
   spec.add_dependency 'mruby-print', core: 'mruby-print'
