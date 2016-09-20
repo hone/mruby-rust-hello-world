@@ -11,11 +11,12 @@ MRuby::Build.new do |conf|
   conf.enable_bintest
   conf.enable_debug
   conf.enable_test
+  #conf.cc.flags << "-DMRB_WORD_BOXING"
 
   gem_config(conf)
 end
 
-MRuby::Build.new('x86_64-pc-linux-gnu') do |conf|
+MRuby::CrossBuild.new('x86_64-pc-linux-gnu') do |conf|
   toolchain :gcc
 
   gem_config(conf)
@@ -79,7 +80,7 @@ MRuby::CrossBuild.new('x86_64-w64-mingw32') do |conf|
 
   gem_config(conf)
 end
-#
+
 #MRuby::CrossBuild.new('i686-w64-mingw32') do |conf|
 #  toolchain :gcc
 #
