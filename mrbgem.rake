@@ -44,6 +44,7 @@ MRuby::Gem::Specification.new('mruby-rust') do |spec|
     arch_info[build.host_target].linker_libraries.each do |lib|
       spec.linker.libraries << lib
     end
+    spec.linker.flags_after_libraries << "-Wl,-no_compact_unwind" if build.host_target == "i386-apple-darwin14"
   else
     # host / 64-bit linux build
     arch_info["x86_64-pc-linux-gnu"].linker_libraries.each do |lib|
