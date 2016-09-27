@@ -60,5 +60,7 @@ MRuby::Gem::Specification.new('mruby-rust-hello-world') do |spec|
     spec.objs << libfile("#{spec.build_dir}/release/libhello")
   end
 
-  run_command e, cargo_command
+  Dir.chdir("../rust") do
+    run_command e, cargo_command
+  end
 end
