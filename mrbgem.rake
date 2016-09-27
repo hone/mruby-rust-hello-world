@@ -1,11 +1,12 @@
-MRuby::Gem::Specification.new('mruby-rust') do |spec|
+MRuby::Gem::Specification.new('mruby-rust-hello-world') do |spec|
   spec.license = 'MIT'
   spec.authors = 'Terence Lee'
   spec.version = '0.0.1'
-  spec.description = 'Rust from Mruby'
-  spec.bins = ["mruby-rust"]
+  spec.description = 'Example of embedding Rust into MRuby'
+  spec.bins = ["mruby-rust-hello-world"]
 
   spec.add_dependency 'mruby-print', core: 'mruby-print'
+  spec.add_dependency 'mferuby-runtime', github: 'hone/mferuby'
 
   require 'open3'
   def run_command env, command
@@ -31,9 +32,7 @@ MRuby::Gem::Specification.new('mruby-rust') do |spec|
   e = {
     "CARGO_TARGET_DIR" => build_dir
   }
-  spec.linker.libraries << 'foo'
-  rust_o_path = "#{build.build_dir}/mrbgems/mruby-rust/src/rust.o"
-  spec.linker.flags_before_libraries << rust_o_path unless spec.linker.flags_before_libraries.include?(rust_o_path)
+  spec.linker.libraries << 'hello'
 
   cargo_command = "cargo build --release"
 
@@ -41,6 +40,12 @@ MRuby::Gem::Specification.new('mruby-rust') do |spec|
     target = arch_info[build.host_target].cargo_target
     cargo_command << " --target=#{target}"
     spec.linker.library_paths << "#{build_dir}/#{target}/release"
+    # force mruby build to generate gem init
+    if target.include?("windows")
+      spec.objs << libfile("#{spec.build_dir}/#{target}/release/hello")
+    else
+      spec.objs << libfile("#{spec.build_dir}/#{target}/release/libhello")
+    end
     arch_info[build.host_target].linker_libraries.each do |lib|
       spec.linker.libraries << lib
     end
@@ -51,6 +56,8 @@ MRuby::Gem::Specification.new('mruby-rust') do |spec|
       spec.linker.libraries << lib
     end
     spec.linker.library_paths << "#{build_dir}/release"
+    # force mruby build to generate gem init
+    spec.objs << libfile("#{spec.build_dir}/release/libhello")
   end
 
   run_command e, cargo_command

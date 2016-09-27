@@ -1,12 +1,20 @@
 [root]
-name = "foo"
+name = "hello"
 version = "0.1.0"
 dependencies = [
- "libc 0.2.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "mferuby 0.1.0 (git+https://github.com/hone/mferuby.git)",
 ]
 
 [[package]]
 name = "libc"
 version = "0.2.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
+
+[[package]]
+name = "mferuby"
+version = "0.1.0"
+source = "git+https://github.com/hone/mferuby.git#01d4a24d541d85737c9adc8dc22b74cf15c39d8d"
+dependencies = [
+ "libc 0.2.2 (registry+https://github.com/rust-lang/crates.io-index)",
+]
 

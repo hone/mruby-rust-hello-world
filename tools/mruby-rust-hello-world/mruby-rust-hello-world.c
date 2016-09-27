@@ -6,7 +6,7 @@
 #include <mruby.h>
 #include <mruby/array.h>
 
-void mrb_mruby_rust_gem_init(mrb_state *mrb);
+void mrb_mruby_rust_hello_world_gem_init(mrb_state *mrb);
 
 int main(int argc, char *argv[])
 {

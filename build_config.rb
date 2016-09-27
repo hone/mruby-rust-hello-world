@@ -11,7 +11,6 @@ MRuby::Build.new do |conf|
   conf.enable_bintest
   conf.enable_debug
   conf.enable_test
-  #conf.cc.flags << "-DMRB_WORD_BOXING"
 
   gem_config(conf)
 end
@@ -74,6 +73,7 @@ MRuby::CrossBuild.new('x86_64-w64-mingw32') do |conf|
   conf.cxx.command      = 'x86_64-w64-mingw32-cpp'
   conf.archiver.command = 'x86_64-w64-mingw32-gcc-ar'
   conf.exts.executable  = ".exe"
+  conf.exts.library     = '.lib'
 
   conf.build_target     = 'x86_64-pc-linux-gnu'
   conf.host_target      = 'x86_64-w64-mingw32'
@@ -90,6 +90,7 @@ end
 #  conf.cxx.command      = 'i686-w64-mingw32-cpp'
 #  conf.archiver.command = 'i686-w64-mingw32-gcc-ar'
 #  conf.exts.executable  = ".exe"
+#  conf.exts.library     = '.lib'
 #
 #  conf.build_target     = 'i686-pc-linux-gnu'
 #  conf.host_target      = 'i686-w64-mingw32'

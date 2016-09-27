@@ -1,10 +1,10 @@
 [package]
-name = "foo"
+name = "hello"
 version = "0.1.0"
 authors = ["Terence Lee <hone02@gmail.com>"]
 
 [dependencies]
-libc = "0.2.0"
+mferuby = { git = "https://github.com/hone/mferuby.git" }
 
 [lib]
 crate-type = ["staticlib"]
